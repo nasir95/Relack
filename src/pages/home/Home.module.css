@@ -1,0 +1,49 @@
+.left {
+  background-color: #680000;
+  height: 1000px;
+}
+
+.right {
+  background-color: #383838;
+  height: 1000px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  min-height: 100vh;
+  padding: 100px;
+  color: white;
+}
+
+.logBtn {
+  margin: 10px;
+}
+
+.signBtn {
+  margin: 10px;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  min-height: 96vh;
+  padding: 100px;
+  color: whitesmoke;
+}
+
+.join {
+  margin: 10px;
+}
+
+.express {
+  margin: 10px;
+}
+
+.fun {
+  margin: 10px;
+}

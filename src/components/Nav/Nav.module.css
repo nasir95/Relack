@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  background-color: #680000;
+  justify-content: space-around;
+  color: #ffffff;
+  box-shadow: 2px 2px 7px 2px lightgrey;
+}
+
+.navbar h1 {
+  font-family: "Permanent Marker";
+  font-size: 2rem;
+}
