@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-
-import styles from "./Register.module.css";
-
 import { Form, Button, Row, Col, Modal } from "react-bootstrap";
-import SignupButton from "../Buttons/signupButton";
+import userService from "../../utils/userService";
 
 class SignupForm extends Component {
   state = this.getInitialState();
@@ -37,18 +34,18 @@ class SignupForm extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     if (!this.isFormValid()) return;
-    // try {
-    //   const { name, email, password } = this.state;
-    //   await userService.signup({ name, email, password });
-    //   this.setState(this.getInitialState(), () => {
-    //     alert("user signed up!");
-    //   });
-    // } catch (error) {}
+    try {
+      const { firstName, lastName, email, password } = this.state;
+      await userService.signup({ firstName, lastName, email, password });
+      this.setState(this.getInitialState(), () => {
+        alert("user signed up!");
+      });
+    } catch (error) {}
   };
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group>
           <Row>
             <Col>
