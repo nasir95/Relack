@@ -28,6 +28,9 @@ userSchema.set("toJSON", {
   transform: function(doc, ret) {
     // remove the password property when serializing doc to JSON
     delete ret.password;
+    delete ret.createdAt;
+    delete ret.updatedAt;
+    delete ret.__v;
     return ret;
   }
 });

@@ -24,7 +24,7 @@ class SignupButton extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Register</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{<SignupForm />}</Modal.Body>
+          <Modal.Body>{<SignupForm {...this.props} />}</Modal.Body>
         </Modal>
       </main>
     );

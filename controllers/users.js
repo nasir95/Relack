@@ -10,9 +10,10 @@ module.exports = {
 
 async function login(req, res) {
   try {
+    console.log(req.body);
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(401).json({ err: "Bad Credentials!" });
-    user.comparePassword(req.body.pw, (err, isMatch) => {
+    user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
         res.json({ token });
@@ -26,6 +27,7 @@ async function login(req, res) {
 }
 
 async function signup(req, res) {
+  console.log("signup");
   try {
     const user = await User.create(req.body);
     const token = createJWT(user);

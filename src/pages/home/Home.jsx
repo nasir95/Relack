@@ -17,12 +17,7 @@ class Home extends Component {
           <Col className={styles.left}>
             {<Navbar />}
             <div className={styles.points}>
-              <h3
-                className={styles.join}
-                href="https://www.flaticon.com/authors/freepik"
-              >
-                Join a community.
-              </h3>
+              <h3 className={styles.join}>Join a community.</h3>
               <h3 className={styles.express}>Express your opinions.</h3>
               <h3 className={styles.fun}>Have fun arguing.</h3>
             </div>
@@ -32,10 +27,10 @@ class Home extends Component {
               <h2> Do you want to know what people are saying?</h2>
               <p className={styles.para}>Find your channel!</p>
               <div className={styles.logBtn}>
-                <LoginButton />
+                <LoginButton {...this.props} />
               </div>
               <div className={styles.signBtn}>
-                <SignupButton />
+                <SignupButton {...this.props} />
               </div>
             </div>
           </Col>
