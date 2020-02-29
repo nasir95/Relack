@@ -73,7 +73,7 @@ class SignupForm extends Component {
           </Row>
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label htmlFor="email">Email address</Form.Label>
           <Form.Control
             id="email"
@@ -85,7 +85,7 @@ class SignupForm extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             id="password"
@@ -97,7 +97,7 @@ class SignupForm extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label htmlFor="passwordConf">Password Confirmation</Form.Label>
           <Form.Control
             id="passwordConf"

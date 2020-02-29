@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
+import userService from "../../utils/userService";
 
 class LoginForm extends Component {
   state = this.getInitialState();
@@ -7,9 +8,14 @@ class LoginForm extends Component {
   getInitialState() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   }
+
+  isFormValid = () => {
+    return this.state.email && this.state.password;
+  };
 
   handleChange = e => {
     this.setState({
@@ -17,14 +23,15 @@ class LoginForm extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
+    if (!this.isFormValid()) return;
   };
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label htmlFor="email">Email address</Form.Label>
           <Form.Control
             id="email"
@@ -36,7 +43,7 @@ class LoginForm extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             id="password"
@@ -48,7 +55,9 @@ class LoginForm extends Component {
           />
         </Form.Group>
         <Modal.Footer>
-          <Button type="submit"> Login </Button>
+          <Button disabled={!this.isFormValid()} type="submit">
+            Login
+          </Button>
         </Modal.Footer>
       </Form>
     );
