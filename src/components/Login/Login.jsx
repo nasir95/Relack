@@ -34,6 +34,7 @@ class LoginForm extends Component {
       this.setState(this.getInitialState(), () => {
         this.props.handleSignupOrLogin();
         this.props.history.push("/dashboard");
+        this.props.handleClose();
       });
     } catch (error) {}
   };

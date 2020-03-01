@@ -30,7 +30,16 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/dashboard" render={props => <Dashboard />} />
+            <Route
+              exact
+              path="/dashboard"
+              render={props => (
+                <Dashboard
+                  {...props}
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              )}
+            />
           </Switch>
         </div>
       </div>

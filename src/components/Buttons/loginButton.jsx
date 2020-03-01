@@ -10,21 +10,23 @@ class LoginButton extends Component {
     };
   }
 
-  render() {
-    const handleClose = () => this.setState({ show: false });
-    const handleShow = () => this.setState({ show: true });
+  handleClose = () => this.setState({ show: false });
+  handleShow = () => this.setState({ show: true });
 
+  render() {
     return (
       <main>
-        <Button variant="primary" size="lg" block onClick={handleShow}>
+        <Button variant="primary" size="lg" block onClick={this.handleShow}>
           Login
         </Button>
 
-        <Modal show={this.state.show} onHide={handleClose}>
+        <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Login</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{<LoginForm {...this.props} />}</Modal.Body>
+          <Modal.Body>
+            {<LoginForm {...this.props} handleClose={this.handleClose} />}
+          </Modal.Body>
         </Modal>
       </main>
     );

@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "build")));
 
 app.use("/api/users", require("./routes/api/users"));
 app.use(require("./config/auth"));
+app.use("/api/channels", require("./routes/api/channels"));
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));

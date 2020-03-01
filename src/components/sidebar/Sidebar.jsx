@@ -1,11 +1,28 @@
 import React from "react";
+import { Paper, Grid, List, Typography } from "@material-ui/core";
+import userService from "../../utils/userService";
 
-import styles from "./Sidebar.module.css";
-
-class Sidebar extends React.Component {
+class SideBar extends React.Component {
   render() {
-    return <h1> Dashboard </h1>;
+    const styles = {
+      name: {
+        marginBottom: 80
+      }
+    };
+    return (
+      <Paper style={this.props.styles.left}>
+        <Grid>
+          <Paper style={styles.name}>
+            {`${userService.getUser().firstName}  ${
+              userService.getUser().lastName
+            }`}
+          </Paper>
+        </Grid>
+
+        <Typography variant="ul">Channels</Typography>
+      </Paper>
+    );
   }
 }
 
-export default Sidebar;
+export default SideBar;
