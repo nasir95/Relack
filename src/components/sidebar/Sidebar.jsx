@@ -1,10 +1,31 @@
 import React from "react";
-import { Paper, Grid, List, Typography, Fab } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  List,
+  Typography,
+  Fab,
+  makeStyles,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import userService from "../../utils/userService";
 import ChannelButton from "../Buttons/channelButton";
+import channelsService from "../../utils/channelsService";
 
 class SideBar extends React.Component {
+  state = {
+    chanName: []
+  };
+
+  async componentDidMount() {
+    const channels = await channelsService.index();
+    this.setState({
+      chanName: channels
+    });
+  }
+
   render() {
     const styles = {
       name: {
@@ -16,23 +37,27 @@ class SideBar extends React.Component {
     };
 
     return (
-      <Paper style={this.props.styles.left}>
-        <Grid>
-          <Paper style={styles.name}>
-            {`${userService.getUser().firstName}  ${
-              userService.getUser().lastName
-            }`}
-          </Paper>
-        </Grid>
+      <>
+        <Paper style={this.props.styles.left}>
+          <Grid>
+            <Paper style={styles.name}>
+              {`${userService.getUser().firstName}  ${
+                userService.getUser().lastName
+              }`}
+            </Paper>
+          </Grid>
 
-        <Typography variant="ul">Channels</Typography>
-        <Fab size="small" color="primary" aria-label="add">
-          <div className={styles.addBtn}>
-            <AddIcon />
+          <Typography variant="ul">Channels</Typography>
+          <div>
+            <List>
+              {this.state.chanName.map((channel, idx) => (
+                <ListItem button>{channel.channelName}</ListItem>
+              ))}
+            </List>
           </div>
-        </Fab>
+        </Paper>
         <ChannelButton {...this.props} />
-      </Paper>
+      </>
     );
   }
 }
