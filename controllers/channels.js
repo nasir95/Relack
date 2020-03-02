@@ -2,19 +2,19 @@ const Channel = require("../models/channel");
 
 module.exports = {
   create,
-  channelName
+  multipleChannels
 };
 
 async function create(req, res) {
   try {
     await Channel.create(req.body);
-    channelName(req, res);
+    multipleChannels(req, res);
   } catch (err) {
-    res.json({ err });
+    res.status(410).json(err);
   }
 }
 
-async function channelName(req, res) {
+async function multipleChannels(req, res) {
   const channels = await Channel.find({});
   res.json(channels);
 }

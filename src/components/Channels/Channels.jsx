@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
+import channelsService from "../../utils/channelsService";
 import userService from "../../utils/userService";
 
-class LoginForm extends Component {
+class ChannelForm extends Component {
   state = this.getInitialState();
 
   getInitialState() {
     return {
-      email: "",
-      password: "",
-      error: ""
+      channelName: "",
+      description: "",
+      createdBy: userService.getUser()
     };
   }
 
   isFormValid = () => {
-    return this.state.email && this.state.password;
+    return this.state.channelName && this.state.description;
   };
 
   handleChange = e => {
@@ -28,11 +29,10 @@ class LoginForm extends Component {
     e.preventDefault();
     if (!this.isFormValid()) return;
     try {
-      const { email, password } = this.state;
-      await userService.login({ email, password });
+      const { channelName, description, createdBy } = this.state;
+      await channelsService.create({ channelName, description, createdBy });
       this.setState(this.getInitialState(), () => {
         this.props.handleSignupOrLogin();
-        this.props.history.push("/dashboard");
         this.props.handleClose();
       });
     } catch (error) {}
@@ -42,31 +42,31 @@ class LoginForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
-          <Form.Label htmlFor="email">Email address</Form.Label>
+          <Form.Label htmlFor="channelName">Channel Name</Form.Label>
           <Form.Control
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter email"
+            id="channelName"
+            name="channelName"
+            type="name"
+            placeholder="Channel Name"
             onChange={this.handleChange}
-            value={this.email}
+            value={this.channelName}
           />
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Label htmlFor="description">Description</Form.Label>
           <Form.Control
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
+            id="description"
+            name="description"
+            type="description"
+            placeholder="Description"
             onChange={this.handleChange}
-            value={this.password}
+            value={this.description}
           />
         </Form.Group>
         <Modal.Footer>
           <Button disabled={!this.isFormValid()} type="submit">
-            Login
+            Create Channel
           </Button>
         </Modal.Footer>
       </Form>
@@ -74,4 +74,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default ChannelForm;
