@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import "./App.css";
-import Nav from "./components/Nav/Nav";
 import Home from "./pages/home/Home";
 import { Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import userService from "./utils/userService";
+import channelsService from "./utils/channelsService";
 
 class App extends Component {
-  state = {
-    user: userService.getUser()
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: userService.getUser(),
+      channels: []
+    };
+  }
 
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() });
   };
+
+  handleUpdateChannels = async () => {
+    const channels = await channelsService.index();
+    this.setState({ channels: channels });
+    console.log(channels);
+  };
+
+  async componentDidMount() {
+    this.handleUpdateChannels();
+  }
 
   render() {
     return (
@@ -37,6 +51,9 @@ class App extends Component {
                 <Dashboard
                   {...props}
                   handleSignupOrLogin={this.handleSignupOrLogin}
+                  handleUpdateChannels={this.handleUpdateChannels}
+                  channels={this.state.channels}
+                  user={this.state.user}
                 />
               )}
             />

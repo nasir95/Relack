@@ -1,31 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Paper,
   Grid,
   List,
   Typography,
-  Fab,
-  makeStyles,
   ListItem,
-  ListItemText
+  LinearProgress
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import userService from "../../utils/userService";
+import { Route, Switch, Link } from "react-router-dom";
+
 import ChannelButton from "../Buttons/channelButton";
-import channelsService from "../../utils/channelsService";
 
-class SideBar extends React.Component {
-  state = {
-    chanName: []
-  };
-
-  async componentDidMount() {
-    const channels = await channelsService.index();
-    this.setState({
-      chanName: channels
-    });
-  }
-
+class SideBar extends Component {
   render() {
     const styles = {
       name: {
@@ -41,20 +27,30 @@ class SideBar extends React.Component {
         <Paper style={this.props.styles.left}>
           <Grid>
             <Paper style={styles.name}>
-              {`${userService.getUser().firstName}  ${
-                userService.getUser().lastName
-              }`}
+              {`${this.props.user.firstName}  ${this.props.user.lastName}`}
             </Paper>
           </Grid>
+          <Typography>Channels</Typography>
 
-          <Typography variant="ul">Channels</Typography>
-          <div>
-            <List>
-              {this.state.chanName.map((channel, idx) => (
-                <ListItem button>{channel.channelName}</ListItem>
-              ))}
-            </List>
-          </div>
+          <Switch>
+            <Route
+              exact
+              path="/dashboard"
+              render={() => (
+                <div>
+                  <List>
+                    {this.props.channels.map((channel, idx) => (
+                      <Link key={idx}>
+                        <ListItem button key={idx}>
+                          {channel.channelName}
+                        </ListItem>
+                      </Link>
+                    ))}
+                  </List>
+                </div>
+              )}
+            />
+          </Switch>
         </Paper>
         <ChannelButton {...this.props} />
       </>

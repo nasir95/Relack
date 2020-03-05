@@ -30,9 +30,14 @@ class ChannelForm extends Component {
     if (!this.isFormValid()) return;
     try {
       const { channelName, description, createdBy } = this.state;
-      await channelsService.create({ channelName, description, createdBy });
+      await channelsService.create({
+        channelName,
+        description,
+        createdBy
+      });
       this.setState(this.getInitialState(), () => {
         this.props.handleSignupOrLogin();
+        this.props.handleUpdateChannels();
         this.props.handleClose();
       });
     } catch (error) {}

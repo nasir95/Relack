@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
             <SideBar styles={styles} {...this.props} />
           </Grid>
           <Grid item md={8}>
-            <RightPane styles={styles} />
+            <RightPane styles={styles} {...this.props} />
           </Grid>
         </Grid>
       </>
