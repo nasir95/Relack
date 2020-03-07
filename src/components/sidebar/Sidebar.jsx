@@ -8,9 +8,9 @@ import {
   LinearProgress
 } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
-import styles from "./SideBar.module.css";
 
 import ChannelButton from "../Buttons/channelButton";
+import Dashboard from "../../pages/dashboard/Dashboard";
 
 class SideBar extends Component {
   render() {
@@ -33,6 +33,7 @@ class SideBar extends Component {
               </Link>
             ))}
           </List>
+          <Route path="/dashboard/:id" Component={Dashboard} />
         </Paper>
         <ChannelButton {...this.props} />
       </>

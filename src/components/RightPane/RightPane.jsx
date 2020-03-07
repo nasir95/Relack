@@ -32,7 +32,9 @@ class RightPane extends React.Component {
         { content, postedBy },
         this.props.match.params.id
       );
-      this.setState(this.getInitialState(), () => {});
+      this.setState(this.getInitialState(), () => {
+        this.props.handleUpdateMessages(this.props.match.params.id);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -45,12 +47,11 @@ class RightPane extends React.Component {
   render() {
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <Paper style={this.props.styles.right}>
             <Form.Group>
               <Form.Label htmlFor="content"></Form.Label>
               <Form.Control
-                onSubmit={this.handleSubmit}
                 id="content"
                 name="content"
                 type="content"
@@ -58,7 +59,11 @@ class RightPane extends React.Component {
                 onChange={this.handleChange}
                 value={this.content}
               />
-              <Button disabled={!this.isFormValid()} type="submit">
+              <Button
+                disabled={!this.isFormValid()}
+                onClick={this.handleSubmit}
+                type="submit"
+              >
                 Add Message
               </Button>
               {this.props.cont.map((m, idx) => (
