@@ -1,7 +1,6 @@
-import React, { Fragment } from "react";
-import styles from "./Dashboard.module.css";
+import React from "react";
 import Navbar from "../../components/Nav/Nav";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import SideBar from "../../components/SideBar/SideBar";
 import RightPane from "../../components/RightPane/RightPane";
 

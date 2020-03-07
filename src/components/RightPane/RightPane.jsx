@@ -1,12 +1,6 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
-import {
-  Paper,
-  ListItem,
-  makeStyles,
-  TextField,
-  Divider
-} from "@material-ui/core";
+import { Form } from "react-bootstrap";
+import { Paper, ListItem } from "@material-ui/core";
 import channelsService from "../../utils/channelsService";
 import styles from "./RightPane.module.css";
 import userService from "../../utils/userService";

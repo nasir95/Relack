@@ -6,10 +6,6 @@ import SignupButton from "../../components/Buttons/signupButton";
 import Navbar from "../../components/Nav/Nav";
 
 class Home extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <Container fluid>

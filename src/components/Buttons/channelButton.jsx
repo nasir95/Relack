@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ChannelForm from "../../components/Channels/Channels";
-import { Modal, Button } from "react-bootstrap";
-import { IconButton, makeStyles } from "@material-ui/core";
+import { Modal } from "react-bootstrap";
+import { IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 class ChannelButton extends Component {
