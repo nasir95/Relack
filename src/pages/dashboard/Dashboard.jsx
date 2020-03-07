@@ -20,7 +20,14 @@ class Dashboard extends React.Component {
         marginTop: 10,
         marginBottom: 10,
         height: 670,
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
+        overflowY: "auto"
+      },
+      stylesName: {
+        marginBottom: 80
+      },
+      stylesBtn: {
+        margin: 1000
       }
     };
     return (

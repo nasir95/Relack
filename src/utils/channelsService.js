@@ -1,6 +1,6 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/channels";
+const BASE_URL = "/api/dashboard";
 
 export default {
   index,
@@ -13,8 +13,8 @@ function index() {
   return fetch(BASE_URL).then(res => res.json());
 }
 
-function indexMessage() {
-  return fetch(BASE_URL).then(res => res.json());
+function indexMessage(idx) {
+  return fetch(BASE_URL + `/${idx}`).then(res => res.json());
 }
 
 function create(channel) {
@@ -36,7 +36,7 @@ function create(channel) {
   });
 }
 
-function createMessage(message) {
+function createMessage(message, idx) {
   console.log(message);
   const options = {
     method: "POST",
@@ -48,7 +48,7 @@ function createMessage(message) {
     body: JSON.stringify(message)
   };
   console.log(options);
-  return fetch(BASE_URL + "/:id", options).then(res => {
+  return fetch(BASE_URL + `/${idx}`, options).then(res => {
     console.log(res);
     if (res.ok) return res.json();
     throw new Error("Bad Credentials!");

@@ -1,6 +1,6 @@
 import React from "react";
-import { Form, Modal, Button } from "react-bootstrap";
-import { Paper, TextField, ListItem } from "@material-ui/core";
+import { Form, Button } from "react-bootstrap";
+import { Paper, ListItem } from "@material-ui/core";
 import channelsService from "../../utils/channelsService";
 
 class RightPane extends React.Component {
@@ -8,7 +8,7 @@ class RightPane extends React.Component {
 
   getInitialState() {
     return {
-      content: [],
+      content: "",
       postedBy: this.props.user
     };
   }
@@ -28,42 +28,44 @@ class RightPane extends React.Component {
     if (!this.isFormValid()) return;
     try {
       const { content, postedBy } = this.state;
-      await channelsService.createMessage({ content, postedBy });
-      this.setState(this.getInitialState(), () => {
-        this.props.handleSignupOrLogin();
-      });
-    } catch (error) {}
+      await channelsService.createMessage(
+        { content, postedBy },
+        this.props.match.params.id
+      );
+      this.setState(this.getInitialState(), () => {});
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // async componentDidMount() {
-  //   const messages = await messagesService.index();
-  //   this.setState({ contents: messages });
-  //   console.log(messages);
-  // }
+  componentDidMount = async () => {
+    this.props.handleUpdateMessages(this.props.match.params.id);
+  };
 
   render() {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-          {/* <Paper style={this.props.styles.right}> */}
-          <Form.Group>
-            <Form.Label htmlFor="content"></Form.Label>
-            <Form.Control
-              id="content"
-              name="content"
-              type="content"
-              placeholder="Enter Message"
-              onChange={this.handleChange}
-              value={this.content}
-            />
-            <Button disabled={!this.isFormValid()} type="submit">
-              Add Message
-            </Button>
-            {/* {this.state.contents.map((m, idx) => (
+          <Paper style={this.props.styles.right}>
+            <Form.Group>
+              <Form.Label htmlFor="content"></Form.Label>
+              <Form.Control
+                onSubmit={this.handleSubmit}
+                id="content"
+                name="content"
+                type="content"
+                placeholder="Enter Message"
+                onChange={this.handleChange}
+                value={this.content}
+              />
+              <Button disabled={!this.isFormValid()} type="submit">
+                Add Message
+              </Button>
+              {this.props.cont.map((m, idx) => (
                 <ListItem key={idx}>{m.content}</ListItem>
-              ))} */}
-          </Form.Group>
-          {/* </Paper> */}
+              ))}
+            </Form.Group>
+          </Paper>
         </Form>
       </>
     );

@@ -5,13 +5,15 @@ import { Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import userService from "./utils/userService";
 import channelsService from "./utils/channelsService";
+import SideBar from "./components/SideBar/SideBar";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: userService.getUser(),
-      channels: []
+      channels: [],
+      cont: []
     };
   }
 
@@ -22,16 +24,24 @@ class App extends Component {
   handleUpdateChannels = async () => {
     const channels = await channelsService.index();
     this.setState({ channels: channels });
-    console.log(channels);
+    // console.log(channels);
+  };
+
+  handleUpdateMessages = async idx => {
+    const messages = await channelsService.indexMessage(idx);
+    this.setState({ cont: messages.messages });
+    console.log(messages);
   };
 
   async componentDidMount() {
-    this.handleUpdateChannels();
+    await this.handleUpdateChannels();
+    await this.handleUpdateMessages();
   }
 
   render() {
     return (
       <div className="App-outer-container">
+        <div></div>
         <div>
           <Switch>
             <Route
@@ -46,14 +56,16 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard"
+              path="/dashboard/:id"
               render={props => (
                 <Dashboard
                   {...props}
                   handleSignupOrLogin={this.handleSignupOrLogin}
                   handleUpdateChannels={this.handleUpdateChannels}
+                  handleUpdateMessages={this.handleUpdateMessages}
                   channels={this.state.channels}
                   user={this.state.user}
+                  cont={this.state.cont}
                 />
               )}
             />

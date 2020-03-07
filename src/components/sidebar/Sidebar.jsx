@@ -8,49 +8,31 @@ import {
   LinearProgress
 } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
+import styles from "./SideBar.module.css";
 
 import ChannelButton from "../Buttons/channelButton";
 
 class SideBar extends Component {
   render() {
-    const styles = {
-      name: {
-        marginBottom: 80
-      },
-      addBtn: {
-        margin: 1000
-      }
-    };
-
     return (
       <>
         <Paper style={this.props.styles.left}>
           <Grid>
-            <Paper style={styles.name}>
+            <Paper style={this.props.styles.stylesName}>
               {`${this.props.user.firstName}  ${this.props.user.lastName}`}
             </Paper>
           </Grid>
           <Typography>Channels</Typography>
 
-          <Switch>
-            <Route
-              exact
-              path="/dashboard"
-              render={() => (
-                <div>
-                  <List>
-                    {this.props.channels.map((channel, idx) => (
-                      <Link key={idx}>
-                        <ListItem button key={idx}>
-                          {channel.channelName}
-                        </ListItem>
-                      </Link>
-                    ))}
-                  </List>
-                </div>
-              )}
-            />
-          </Switch>
+          <List>
+            {this.props.channels.map((channel, idx) => (
+              <Link key={idx} to={`/dashboard/${channel._id}`}>
+                <ListItem button key={idx}>
+                  {channel.channelName}
+                </ListItem>
+              </Link>
+            ))}
+          </List>
         </Paper>
         <ChannelButton {...this.props} />
       </>

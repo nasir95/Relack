@@ -26,19 +26,22 @@ async function multipleMessages(req, res) {
   const channelWithMessages = await Channel.findById(req.params.id).populate(
     "messages"
   );
+  // console.log(channelWithMessages);
   res.json(channelWithMessages);
 }
 
 async function messageCreate(req, res) {
   try {
-    const message = await Message.create(req.body);
     const channel = await Channel.findById(req.params.id);
+    const message = await Message.create(req.body);
 
     channel.messages.push(message._id);
+    await message.save();
     await channel.save();
-
+    console.log(channel);
     res.json({ channel });
   } catch (error) {
+    console.log(error);
     // handle the error if or when it happens
   }
 }

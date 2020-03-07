@@ -1,0 +1,23 @@
+.stylesLeft {
+  padding: 20;
+  margin-top: 10;
+  margin-bottom: 10;
+  height: 670;
+  overflow-y: auto;
+}
+
+.stylesRight {
+  padding: 20;
+  margin-top: 10;
+  margin-bottom: 10;
+  height: 670;
+  white-space: nowrap;
+}
+
+.stylesName {
+  margin-bottom: 80;
+}
+
+.stylesBtn {
+  margin: 1000;
+}
