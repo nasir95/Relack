@@ -5,7 +5,6 @@ import { Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import userService from "./utils/userService";
 import channelsService from "./utils/channelsService";
-import SideBar from "./components/SideBar/SideBar";
 
 class App extends Component {
   constructor(props) {
