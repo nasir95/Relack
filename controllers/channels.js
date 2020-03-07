@@ -26,6 +26,7 @@ async function multipleMessages(req, res) {
   const channelWithMessages = await Channel.findById(req.params.id).populate(
     "messages"
   );
+
   // console.log(channelWithMessages);
   res.json(channelWithMessages);
 }
@@ -45,12 +46,3 @@ async function messageCreate(req, res) {
     // handle the error if or when it happens
   }
 }
-
-// async function messageCreate(message) {
-//   const channel = new Channel({
-//     message
-//   });
-
-//   const result = await channel.save();
-//   console.log(result);
-// }

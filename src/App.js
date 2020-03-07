@@ -27,6 +27,12 @@ class App extends Component {
     // console.log(channels);
   };
 
+  handleLogout = () => {
+    userService.logout();
+
+    this.setState({ user: null, channels: [] });
+  };
+
   handleUpdateMessages = async idx => {
     const messages = await channelsService.indexMessage(idx);
     this.setState({ cont: messages.messages });
@@ -36,6 +42,10 @@ class App extends Component {
   async componentDidMount() {
     await this.handleUpdateChannels();
     await this.handleUpdateMessages();
+  }
+
+  async componentWillUnmount() {
+    this.handleUpdateMessages();
   }
 
   render() {
@@ -63,6 +73,7 @@ class App extends Component {
                   handleSignupOrLogin={this.handleSignupOrLogin}
                   handleUpdateChannels={this.handleUpdateChannels}
                   handleUpdateMessages={this.handleUpdateMessages}
+                  handleLogout={this.handleLogout}
                   channels={this.state.channels}
                   user={this.state.user}
                   cont={this.state.cont}

@@ -1,7 +1,15 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import { Paper, ListItem } from "@material-ui/core";
+import {
+  Paper,
+  ListItem,
+  makeStyles,
+  TextField,
+  Divider
+} from "@material-ui/core";
 import channelsService from "../../utils/channelsService";
+import styles from "./RightPane.module.css";
+import userService from "../../utils/userService";
 
 class RightPane extends React.Component {
   state = this.getInitialState();
@@ -9,7 +17,7 @@ class RightPane extends React.Component {
   getInitialState() {
     return {
       content: "",
-      postedBy: this.props.user
+      postedBy: userService.getUser()
     };
   }
 
@@ -40,34 +48,36 @@ class RightPane extends React.Component {
     }
   };
 
-  componentDidMount = async () => {
-    this.props.handleUpdateMessages(this.props.match.params.id);
-  };
-
   render() {
     return (
       <>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Paper style={this.props.styles.right}>
-            <Form.Group>
+            <Form.Group onSubmit={this.handleSubmit}>
               <Form.Label htmlFor="content"></Form.Label>
               <Form.Control
+                className={styles.input}
+                required
+                fullWidth
                 id="content"
+                label="Message"
+                style={{ margin: 8 }}
+                placeholder="Enter A Message"
+                margin="normal"
                 name="content"
-                type="content"
-                placeholder="Enter Message"
+                multiline
+                variant="outlined"
                 onChange={this.handleChange}
-                value={this.content}
+                value={this.state.content}
               />
-              <Button
-                disabled={!this.isFormValid()}
-                onClick={this.handleSubmit}
-                type="submit"
-              >
+              {/* <Button disabled={!this.isFormValid()} type="submit">
                 Add Message
-              </Button>
+              </Button> */}
               {this.props.cont.map((m, idx) => (
-                <ListItem key={idx}>{m.content}</ListItem>
+                <ListItem button key={idx}>
+                  {`${this.state.postedBy.firstName}  ${this.state.postedBy.lastName}: 
+                  ${m.content}`}
+                </ListItem>
               ))}
             </Form.Group>
           </Paper>

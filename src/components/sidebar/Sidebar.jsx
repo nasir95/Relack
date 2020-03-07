@@ -3,14 +3,14 @@ import {
   Paper,
   Grid,
   List,
-  Typography,
   ListItem,
-  LinearProgress
+  IconButton,
+  Typography
 } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Route, Switch, Link } from "react-router-dom";
-
+import styles from "./SideBar.module.css";
 import ChannelButton from "../Buttons/channelButton";
-import Dashboard from "../../pages/dashboard/Dashboard";
 
 class SideBar extends Component {
   render() {
@@ -20,22 +20,31 @@ class SideBar extends Component {
           <Grid>
             <Paper style={this.props.styles.stylesName}>
               {`${this.props.user.firstName}  ${this.props.user.lastName}`}
+              <IconButton>
+                <Link to="" onClick={this.props.handleLogout}>
+                  <ExitToAppIcon />
+                </Link>
+              </IconButton>
             </Paper>
           </Grid>
-          <Typography>Channels</Typography>
+          <Typography>
+            channels <ChannelButton {...this.props} />
+          </Typography>
 
           <List>
             {this.props.channels.map((channel, idx) => (
-              <Link key={idx} to={`/dashboard/${channel._id}`}>
+              <Link
+                className={styles.link}
+                key={idx}
+                to={`/dashboard/${channel._id}`}
+              >
                 <ListItem button key={idx}>
-                  {channel.channelName}
+                  {channel.channelName.toLowerCase()}
                 </ListItem>
               </Link>
             ))}
           </List>
-          <Route path="/dashboard/:id" Component={Dashboard} />
         </Paper>
-        <ChannelButton {...this.props} />
       </>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ChannelForm from "../../components/Channels/Channels";
 import { Modal, Button } from "react-bootstrap";
+import { IconButton, makeStyles } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 class ChannelButton extends Component {
   constructor() {
@@ -16,9 +18,9 @@ class ChannelButton extends Component {
   render() {
     return (
       <main>
-        <Button variant="primary" size="lg" block onClick={this.handleShow}>
-          Add Channel
-        </Button>
+        <IconButton onClick={this.handleShow}>
+          <AddIcon htmlColor="white" />
+        </IconButton>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>

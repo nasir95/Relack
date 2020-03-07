@@ -13,7 +13,9 @@ class Dashboard extends React.Component {
         marginTop: 10,
         marginBottom: 10,
         height: 670,
-        overflowY: "auto"
+        overflowY: "auto",
+        backgroundColor: "#383838",
+        color: "white"
       },
       right: {
         padding: 20,
@@ -21,17 +23,24 @@ class Dashboard extends React.Component {
         marginBottom: 10,
         height: 670,
         whiteSpace: "nowrap",
-        overflowY: "auto"
+        overflowY: "auto",
+        backgroundColor: "#383838",
+        color: "white"
       },
       stylesName: {
-        marginBottom: 80
+        marginBottom: 80,
+        backgroundColor: "#383838",
+        color: "white"
       },
       stylesBtn: {
         margin: 1000
+      },
+      Dashboard: {
+        backgroundColor: "#303030"
       }
     };
     return (
-      <>
+      <main style={styles.Dashboard}>
         <Navbar />
         <Grid container spacing={1}>
           <Grid item md={2}>
@@ -41,7 +50,7 @@ class Dashboard extends React.Component {
             <RightPane styles={styles} {...this.props} />
           </Grid>
         </Grid>
-      </>
+      </main>
     );
   }
 }
